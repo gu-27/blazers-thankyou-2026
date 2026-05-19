@@ -53,11 +53,9 @@
   .quote-attr { font-family: 'Outfit', sans-serif; font-size: .78rem; font-style: normal; font-weight: 600; letter-spacing: .05em; opacity: .55; margin-top: .5rem; }
 
   /* Photo grid */
-  .photo-grid { display: grid; grid-template-columns: 2fr 1fr; gap: .75rem; margin-top: 2.5rem; max-width: 900px; }
-  .photo-stack { display: flex; flex-direction: column; gap: .75rem; }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 280px 280px; gap: .75rem; margin-top: 2.5rem; max-width: 900px; }
   .photo-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
-  .photo-main { height: 420px; }
-  .photo-sub  { height: 202px; }
+  .photo-wide { grid-column: span 2; }
 
   /* Student card */
   .student-card { display: flex; align-items: flex-start; gap: 3rem; max-width: 900px; }
@@ -101,7 +99,9 @@
     .pull-quote { border-left: none; border-top: 3px solid rgba(255,255,255,.3); padding-left: 0; padding-top: 1rem; }
     .bg-white .pull-quote { border-top-color: var(--red); }
     .photo-grid { grid-template-columns: 1fr; }
-    .photo-main, .photo-sub { height: 260px; }
+    .photo-wide, .photo-grid img { height: 240px; }
+    .photo-wide { grid-column: span 1; }
+    .photo-grid { grid-template-rows: auto; }
   }
 </style>
 </head>
@@ -125,13 +125,10 @@
     <h2 class="section-title">Moments That Mattered</h2>
     <p class="lead" style="margin-top:.75rem;">From the Nike campus to a candid session with alumna Torrey, and then to Moda Center — the Portland trip was a full immersion in what a career in sports can look like.</p>
     <div class="photo-grid">
-      <div>
-        <img class="photo-main" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5537.JPG" alt="Portland team">
-      </div>
-      <div class="photo-stack">
-        <img class="photo-sub" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5581.JPG" alt="Nike visit">
-        <img class="photo-sub" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5609.JPG" alt="Portland">
-      </div>
+      <img class="photo-wide" src="img/events/IMG_5641.jpeg" alt="GSCG x Trail Blazers presentation">
+      <img src="img/events/blazers-mascot.jpeg" alt="Trail Blazers mascot moment">
+      <img src="img/events/IMG_5656.jpeg" alt="Team at Trail Blazers">
+      <img class="photo-wide" src="img/events/IMG_5676.jpeg" alt="At the game at Moda Center">
     </div>
   </div>
 </section>
