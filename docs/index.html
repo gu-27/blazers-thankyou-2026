@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You, Portland Trail Blazers — GSCG 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: #041E42; color: white; overflow-x: hidden; }
+
+  :root {
+    --navy:   #041E42;
+    --red:    #C8102E;
+    --accent: #e8edf5;
+    --border: #dde3ec;
+    --muted:  #6b7a8d;
+  }
+
+  .bg-navy   { background: var(--navy); color: white; }
+  .bg-red    { background: var(--red);  color: white; }
+  .bg-white  { background: white;       color: var(--navy); }
+  .bg-accent { background: var(--accent); color: var(--navy); }
+
+  .slide { min-height: 100vh; position: relative; display: flex; align-items: center; }
+  .slide-inner { width: 100%; max-width: 1100px; margin: 0 auto; padding: 7rem 4rem; }
+
+  .fixed-nav { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: .5rem; z-index: 100; }
+  .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.3); border: none; cursor: pointer; transition: all .2s; padding: 0; }
+  .nav-dot.active { background: var(--red); transform: scale(1.3); }
+  .nav-dot.dark { background: rgba(4,30,66,.25); }
+  .nav-dot.dark.active { background: var(--red); }
+
+  .eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; display: block; }
+  .bg-red .eyebrow, .bg-navy .eyebrow { color: rgba(255,255,255,.55); }
+
+  h1.display { font-family: 'Libre Baskerville', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); line-height: 1.1; font-style: italic; }
+  h2.section-title { font-family: 'Libre Baskerville', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+
+  .lead { font-size: 1.05rem; font-weight: 300; line-height: 1.8; max-width: 640px; }
+  .bg-navy .lead, .bg-red .lead { color: rgba(255,255,255,.72); }
+  .bg-white .lead, .bg-accent .lead { color: var(--muted); }
+
+  .pull-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.08rem; font-style: italic; line-height: 1.78;
+    border-left: 3px solid rgba(255,255,255,.3);
+    padding-left: 1.25rem; color: rgba(255,255,255,.88);
+    margin: 1.5rem 0;
+  }
+  .bg-white .pull-quote, .bg-accent .pull-quote { border-left-color: var(--red); color: #3a4556; }
+  .quote-attr { font-family: 'Outfit', sans-serif; font-size: .78rem; font-style: normal; font-weight: 600; letter-spacing: .05em; opacity: .55; margin-top: .5rem; }
+
+  /* Photo grid */
+  .photo-grid { display: grid; grid-template-columns: 2fr 1fr; gap: .75rem; margin-top: 2.5rem; max-width: 900px; }
+  .photo-stack { display: flex; flex-direction: column; gap: .75rem; }
+  .photo-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
+  .photo-main { height: 420px; }
+  .photo-sub  { height: 202px; }
+
+  /* Student card */
+  .student-card { display: flex; align-items: flex-start; gap: 3rem; max-width: 900px; }
+  .headshot { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid rgba(255,255,255,.15); }
+  .bg-white .headshot, .bg-accent .headshot { border-color: var(--border); }
+  .student-name { font-family: 'Libre Baskerville', serif; font-size: 1.6rem; font-style: italic; margin-bottom: .2rem; }
+  .student-meta { font-size: .8rem; font-weight: 500; letter-spacing: .04em; opacity: .5; margin-bottom: 1.5rem; }
+  .student-divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 0; }
+  .bg-white .student-divider, .bg-accent .student-divider { border-color: var(--border); }
+
+  /* Mini card (no reflection) */
+  .mini-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+  .mini-card {
+    display: flex; align-items: center; gap: 1rem;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px; padding: 1rem 1.25rem; flex: 1; min-width: 240px;
+  }
+  .mini-headshot { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .mini-name { font-weight: 600; font-size: .95rem; }
+  .mini-sub { font-size: .75rem; opacity: .5; margin-top: .1rem; }
+
+  /* Principle grid */
+  .principle-section { margin-bottom: 3.5rem; }
+  .principle-label { font-size: .6rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-bottom: .5rem; display: block; }
+  .principle-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; font-style: italic; margin-bottom: 1.25rem; color: var(--navy); }
+  .principle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1rem; }
+  .p-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.4rem; }
+  .p-card-head { display: flex; align-items: center; gap: .85rem; margin-bottom: 1rem; }
+  .p-card-headshot { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+  .p-card-name { font-weight: 600; font-size: .9rem; color: var(--navy); }
+  .p-card-meta { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
+  .p-quote { font-family: 'Libre Baskerville', serif; font-size: .87rem; font-style: italic; line-height: 1.7; color: #3a4556; }
+
+  /* Closing */
+  .closing-rule { width: 48px; height: 3px; background: var(--red); margin-bottom: 2rem; border-radius: 2px; }
+  .closing-footer { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; opacity: .35; margin-top: 3rem; }
+
+  @media (max-width: 700px) {
+    .slide-inner { padding: 5rem 1.5rem; }
+    .student-card { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+    .pull-quote { border-left: none; border-top: 3px solid rgba(255,255,255,.3); padding-left: 0; padding-top: 1rem; }
+    .bg-white .pull-quote { border-top-color: var(--red); }
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-main, .photo-sub { height: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="fixed-nav" id="nav" aria-label="Page sections"></nav>
+
+<!-- S1: HERO -->
+<section class="slide bg-navy" id="s1">
+  <div class="slide-inner">
+    <span class="eyebrow">Gonzaga Sports Consulting Group &nbsp;·&nbsp; Portland, OR &nbsp;·&nbsp; Spring 2026</span>
+    <h1 class="display">Thank You,<br>Portland Trail Blazers.</h1>
+    <p class="lead" style="margin-top:1.75rem;">Seven students traveled to Moda Center this spring with real work, real ideas, and a genuine excitement to learn. What they found was an organization that matched that energy — welcoming them behind the scenes, sitting through a full presentation, and sending them back to Spokane with a better sense of what they're capable of. This is a small expression of that gratitude.</p>
+  </div>
+</section>
+
+<!-- S2: PHOTOS -->
+<section class="slide bg-white" id="s2">
+  <div class="slide-inner">
+    <span class="eyebrow">The Experience</span>
+    <h2 class="section-title">Moments That Mattered</h2>
+    <p class="lead" style="margin-top:.75rem;">From the Nike campus to a candid session with alumna Torrey, and then to Moda Center — the Portland trip was a full immersion in what a career in sports can look like.</p>
+    <div class="photo-grid">
+      <div>
+        <img class="photo-main" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5537.JPG" alt="Portland team">
+      </div>
+      <div class="photo-stack">
+        <img class="photo-sub" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5581.JPG" alt="Nike visit">
+        <img class="photo-sub" src="https://gu-27.github.io/gscg-photos/photos/portland/IMG_5609.JPG" alt="Portland">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: PRINCIPLES -->
+<section class="slide bg-accent" id="s3">
+  <div class="slide-inner">
+    <span class="eyebrow">Who We Are</span>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">The Principles Behind the Work</h2>
+    <p class="lead" style="margin-bottom:3rem;">GSCG is built on four commitments that guide how members approach every project, every trip, and every interaction. The Portland trip was a chance to live all four of them at once.</p>
+
+    <div class="principle-section">
+      <span class="principle-label">Principle 01</span>
+      <div class="principle-title">Commit to growth through GSCG</div>
+      <div class="principle-grid">
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/matthew-marin.jpg" alt="Matthew Marin">
+            <div><div class="p-card-name">Matthew Marin</div><div class="p-card-meta">Senior · Marketing · Project Manager</div></div>
+          </div>
+          <p class="p-quote">"Being able to hear feedback and connect with professionals in the sports industry was so rewarding and valuable for my professional growth. Knowing that they were willing to give up time for us — even though they had to work a game that same evening — is something I will cherish into my career."</p>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/dylan-hite.jpg" alt="Dylan Hite">
+            <div><div class="p-card-name">Dylan Hite</div><div class="p-card-meta">Sophomore · Finance & Economics · Director</div></div>
+          </div>
+          <p class="p-quote">"Working with the Trailblazers gave me a clearer understanding of how B2B strategy is developed and applied in real world settings. It was interesting to see the weight that gets put on data in partnership strategy, and then turning it into an actionable solution."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-section">
+      <span class="principle-label">Principle 02</span>
+      <div class="principle-title">Support each other's growth</div>
+      <div class="principle-grid">
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/mia-crosby.jpg" alt="Mia Crosby">
+            <div><div class="p-card-name">Mia Crosby</div><div class="p-card-meta">Sophomore · Marketing International · Consultant</div></div>
+          </div>
+          <p class="p-quote">"I really liked learning about all the different roles involved and how each one contributes to making game days run smoothly. It showed how much work and sacrifice goes on behind the scenes, and how strong the sense of community is in bringing everything together."</p>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/lauren-smith.jpg" alt="Lauren Smith">
+            <div><div class="p-card-name">Lauren Smith</div><div class="p-card-meta">Sophomore · Sports Management · Consultant</div></div>
+          </div>
+          <p class="p-quote">"Traveling with a team is something I hope every consultant gets to experience at least once throughout their career in GSCG. We learned and grew so much together, but also shared so many laughs and so many awesome memories, and I felt so much closer to each individual team member after the trip."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-section">
+      <span class="principle-label">Principle 03</span>
+      <div class="principle-title">Do hard things</div>
+      <div class="principle-grid">
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/noah-liu.jpg" alt="Noah Liu">
+            <div><div class="p-card-name">Noah Liu</div><div class="p-card-meta">Freshman · Finance & MIS · Consultant</div></div>
+          </div>
+          <p class="p-quote">"That presentation was one of the more stressful experiences I have had, especially since I did not expect to walk into a full boardroom. Having that experience to present under pressure and feel confident in the work we had done was formative and memorable for all of us."</p>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/dylan-hite.jpg" alt="Dylan Hite">
+            <div><div class="p-card-name">Dylan Hite</div><div class="p-card-meta">Sophomore · Finance & Economics · Director</div></div>
+          </div>
+          <p class="p-quote">"Collaborating on a live problem for a real organization highlighted the importance of being aligned as a team, especially when recommending solutions. It pushed us to be precise and intentional in a way that's hard to replicate in a classroom."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-section" style="margin-bottom:0;">
+      <span class="principle-label">Principle 04</span>
+      <div class="principle-title">Have fun</div>
+      <div class="principle-grid">
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/mia-crosby.jpg" alt="Mia Crosby">
+            <div><div class="p-card-name">Mia Crosby</div><div class="p-card-meta">Sophomore · Marketing International · Consultant</div></div>
+          </div>
+          <p class="p-quote">"I literally had so much fun going to Portland because I felt like we really got close as a group. It was so rewarding to present in person, and so rewarding to be there all together. I also loved the final presentation!"</p>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head">
+            <img class="p-card-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/matthew-marin.jpg" alt="Matthew Marin">
+            <div><div class="p-card-name">Matthew Marin</div><div class="p-card-meta">Senior · Marketing · Project Manager</div></div>
+          </div>
+          <p class="p-quote">"Seeing behind-the-scenes processes of an NBA team is something that not many people get to experience. Getting to attend the game that evening was the perfect way to close it out — and to see the organization we'd been working for in full operation."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S4: STUDENT REFLECTIONS -->
+<section class="slide bg-navy" id="s4">
+  <div class="slide-inner">
+    <span class="eyebrow">Student Reflections</span>
+    <h2 class="section-title" style="margin-bottom:.5rem;">In Their Own Words</h2>
+    <p class="lead" style="margin-bottom:3.5rem;">Each student came to Portland with a question they were trying to answer. Here is what they found.</p>
+
+    <div style="display:flex;flex-direction:column;gap:3.5rem;">
+
+      <div class="student-card">
+        <img class="headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/matthew-marin.jpg" alt="Matthew Marin">
+        <div>
+          <div class="student-name">Matthew Marin</div>
+          <div class="student-meta">Senior · B.A. Marketing · Los Angeles, CA · Project Manager</div>
+          <div class="pull-quote">"Visiting the Blazers for our midpoint was truly a one of a kind experience that I am so grateful to have been able to experience. Being able to hear feedback and connect with professionals in the sports industry was so rewarding and valuable for my professional growth."
+            <div class="quote-attr">Trailblazers Visit Reflection</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/mia-crosby.jpg" alt="Mia Crosby">
+        <div>
+          <div class="student-name">Mia Crosby</div>
+          <div class="student-meta">Sophomore · B.A. Marketing International · Minneapolis, MN · Consultant</div>
+          <div class="pull-quote">"Presenting in person made all the work and research seem worth it and a lot more valuable. It was really cool to see the space where everything happens and where all the events come together. I really appreciated getting a behind the scenes look because it made everything feel more real."
+            <div class="quote-attr">Trailblazers Visit Reflection</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/lauren-smith.jpg" alt="Lauren Smith">
+        <div>
+          <div class="student-name">Lauren Smith</div>
+          <div class="student-meta">Sophomore · B.A. Sports Management · Saratoga, CA · Consultant</div>
+          <div class="pull-quote">"I truly felt the immersion within the real business world during our midpoint. I am so grateful to have gotten to experience traveling to Portland, presenting to the Trailblazers, and meeting people who are building careers in sports. My experience as a consultant this semester is one that will never be forgotten."
+            <div class="quote-attr">End of Semester Reflection</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/dylan-hite.jpg" alt="Dylan Hite">
+        <div>
+          <div class="student-name">Dylan Hite</div>
+          <div class="student-meta">Sophomore · B.A. Finance & Economics · Tacoma, WA · Director</div>
+          <div class="pull-quote">"Working with the Trailblazers gave me a clearer understanding of how B2B strategy is developed and applied in real world settings. Collaborating on a live problem highlighted the importance of being aligned as a team, especially when recommending solutions. Also, it was interesting to see the weight that gets put on data in partnership strategy, and then turning it into an actionable solution."
+            <div class="quote-attr">Trailblazers Visit Reflection</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/noah-liu.jpg" alt="Noah Liu">
+        <div>
+          <div class="student-name">Noah Liu</div>
+          <div class="student-meta">Freshman · B.A. Finance & MIS · San Jose, CA · Consultant</div>
+          <div class="pull-quote">"The tour was both amazing and thought-provoking. It pushed me to see these spaces not just as entertainment, but also as spaces with specific functions and strategy. It was interesting to see the stadium both from the perspective of a fan watching the game as well as someone in a position to influence how these spaces operate."
+            <div class="quote-attr">Trailblazers Visit Reflection</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rachel & Jake — no reflections submitted -->
+    <p style="font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:3rem;margin-bottom:1rem;">Also on the trip</p>
+    <div class="mini-row">
+      <div class="mini-card">
+        <img class="mini-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/rachel-walker.jpg" alt="Rachel Walker">
+        <div>
+          <div class="mini-name">Rachel Walker</div>
+          <div class="mini-sub">Junior · Sports Management · Director</div>
+        </div>
+      </div>
+      <div class="mini-card">
+        <img class="mini-headshot" src="https://gu-27.github.io/GSCG-ThankYou-Nike-2026/img/headshots/jake-scalzo.jpg" alt="Jake Scalzo">
+        <div>
+          <div class="mini-name">Jake Scalzo</div>
+          <div class="mini-sub">Junior · Marketing & Business Analytics · Consultant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: CLOSING -->
+<section class="slide bg-red" id="s5">
+  <div class="slide-inner">
+    <div class="closing-rule"></div>
+    <span class="eyebrow">Gonzaga Sports Consulting Group</span>
+    <h2 class="section-title" style="max-width:700px;">Thank you for investing in the next generation of sports business leaders.</h2>
+    <p class="lead" style="margin-top:1.75rem;">The time you gave — the tour, the feedback session, the game — created something that a classroom never could. Each of these students left Portland with a clearer picture of who they want to become. That is entirely because of you.</p>
+    <div class="closing-footer">Spring 2026 &nbsp;·&nbsp; GSCG Portland Team &nbsp;·&nbsp; Gonzaga University</div>
+  </div>
+</section>
+
+<script>
+  const sections = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  sections.forEach((s, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (s.classList.contains('bg-white') || s.classList.contains('bg-accent') ? ' dark' : '');
+    dot.title = 'Section ' + (i + 1);
+    dot.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+    nav.appendChild(dot);
+  });
+  const dots = nav.querySelectorAll('.nav-dot');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const i = [...sections].indexOf(e.target);
+        dots.forEach((d, j) => d.classList.toggle('active', i === j));
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
